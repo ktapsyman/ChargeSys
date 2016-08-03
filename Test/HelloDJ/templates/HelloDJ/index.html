@@ -1,0 +1,92 @@
+<!--{% load staticfiles %}-->
+<link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.min.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<div style="font-size:40pt" align="center">Hello world page</div>
+<button id="BtnPost" style="font-size:large">POST</button>
+<table class="table table-bordered">
+	<tr>
+		<th style="font-size:large;textalign=center">Item Name</td>
+		<th style="font-size:large;textalign=center">Total cost</td>
+		<th style="font-size:large;textalign=center">Date</td>
+	</tr>
+{% if List and 0 != List.Length %}
+	{% for receipt in List %}
+		<tr>
+			<td style="font-size:large;textalign=center" width="30%">{{receipt.ItemName}} </td>
+			<td style="font-size:large;textalign=center" width="30%">{{receipt.TotalCost}} </td>
+			<td style="font-size:large;textalign=center" width="40%">{{receipt.ShoppingDate}} </td>
+		</tr>
+	{% endfor %}
+		<tr>
+			<td style="font-size:large;textalign=center" width="30%" >Total </td>
+			<td style="font-size:large;textalign=center" width="30%" colspan="2">{{TotalCost}} </td>
+		</tr>
+{% else %}
+	<tr>No data in DB</tr>
+{% endif %}
+</table>
+{{
+	x = 3
+	<p>{{x}}</p>
+}}
+
+<script type="text/javascript">
+	jQuery( function($){
+		$(document).ready()
+		{
+			console.log("Hello JQuery again!");
+		}
+	function getCookie(name) {
+    	var cookieValue = null;
+    	if (document.cookie && document.cookie !== '') {
+        	var cookies = document.cookie.split(';');
+        	for (var i = 0; i < cookies.length; i++) {
+            	var cookie = jQuery.trim(cookies[i]);
+            	// Does this cookie string begin with the name we want?
+            	if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                	cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                	break;
+            	}
+        	}
+    	}
+    	return cookieValue;
+	}
+	var csrftoken = getCookie('csrftoken');
+	function csrfSafeMethod(method) {
+    	// these HTTP methods do not require CSRF protection
+    	return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	$.ajaxSetup({
+    	beforeSend: function(xhr, settings) {
+        		if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            		xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					console.log( "Successfully set token" );
+        		}
+				else
+				{
+					console.log( "Fail to set token" );
+				}
+    		}
+		});
+	$("#BtnPost").on( 'click', function()
+	{
+			var data = ['Str1', 5, 'Str2', 3.14159];
+			for( i in data )
+			{
+				console.log( data[i] );
+			}
+			
+			$.post
+			(
+				'TestPost/',
+				{ 'TestData[]' : data },
+				function(result)
+				{
+					console.log( result.Result );
+				},
+				'json'
+			);
+	});
+});
+
+</script>

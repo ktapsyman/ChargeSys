@@ -1,0 +1,13 @@
+#3 steps of creating a model
+	1:Add a model in models.py like
+		class Question(models.Model):								#Question will be the table name in database
+    		question_text = models.CharField(max_length=200)		#Field1
+    		create_date = models.DateTimeField('date created')		#Field2
+	#For more information of field types of models, pls refer to https://docs.djangoproject.com/en/1.9/ref/models/fields/
+
+	2:Run manage.py makemigrations
+
+	3:Run manage.py migrate
+
+https://docs.djangoproject.com/ja/1.9/topics/http/urls/
+http://stackoverflow.com/questions/150505/capturing-url-parameters-in-request-get
